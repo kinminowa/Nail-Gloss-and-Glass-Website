@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message a Nail Tech</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background: #f5f5f5;
+  }
+  .sidebar {
+    width: 280px;
+    background: white;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+  }
+  .tech-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+  }
+  .tech-card:hover {
+    background: #f9f9f9;
+  }
+  .tech-card img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .tech-info h4 {
+    margin: 0;
+    font-size: 16px;
+  }
+  .tech-info p {
+    margin: 3px 0 0;
+    font-size: 12px;
+    color: gray;
+  }
+  .chat-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fafafa;
+  }
+  .chat-header {
+    background: #E1DED7;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #ccc;
+    height: 60px;
+  }
+  .chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .chat-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .chat-header a {
+    text-decoration: none;
+    color: #4F0404;
+    font-weight: bold;
+    margin-left: auto;
+  }
+  .messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .message {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+  .message.user {
+    background: #4F0404;
+    color: white;
+    align-self: flex-end;
+  }
+  .message.tech {
+    background: #ddd;
+    align-self: flex-start;
+  }
+  .chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #ccc;
+  }
+  .chat-input textarea {
+    flex: 1;
+    resize: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 40px;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .chat-input button {
+    background: #4F0404;
+    color: white;
+    border: none;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar" id="techList"></div>
+
+<!-- Chat panel -->
+<div class="chat-panel">
+  <div class="chat-header">
+    <img id="chatProfile" src="" alt="" style="display:none;">
+    <h3 id="chatWith">Select a Nail Tech</h3>
+    <a href="index.html">Home</a>
+  </div>
+  <div class="messages" id="messages"></div>
+  <div class="chat-input">
+    <textarea id="messageInput" placeholder="Type your message..."></textarea>
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+const techs = [
+  { img: 'img1.jpg', name: 'Jessa Nails by Jessa Marie', tags: 'Gel, Nail Art, Home Service' },
+  { img: 'img2.jpg', name: 'Polished by Arriane', tags: 'Acrylic, Luxe Design, Studio Only' },
+  { img: 'img3.jpg', name: 'TipTop Nails by Mika', tags: 'Gel Polish, Minimalist' },
+  { img: 'img4.jpg', name: 'Glam Touch by Bea', tags: '3D Art, Builder Gel' },
+  { img: 'img5.jpg', name: 'Claw & Glow by Shane', tags: 'Acrylic, French Tips' },
+  { img: 'img6.jpg', name: 'Nailbar Diaries by Kaye', tags: 'GelX, Ombre, Natural Look' },
+  { img: 'img7.jpg', name: 'Bella Nails Studio', tags: 'Gel, Nail Art, Home Service' },
+  { img: 'img8.jpg', name: 'Luna Nail Lounge', tags: 'Acrylic, Nail Art, Walk-in' },
+  { img: 'img9.jpg', name: 'Sophia’s Nail Bar', tags: 'Gel, Spa, Nail Care' },
+  { img: 'img10.jpg', name: 'Maya Nail Artistry', tags: 'Manicure, Pedicure, Home Service' },
+  { img: 'img11.jpg', name: 'Olivia Nails', tags: 'Nail Art, Gel, Acrylic' },
+  { img: 'img12.jpg', name: 'Aria Nail Spa', tags: 'Gel, Pedicure, Walk-in' }
+];
+
+let currentTech = null;
+let messagesData = {}; // store per-tech chat history
+
+const techList = document.getElementById('techList');
+const chatWith = document.getElementById('chatWith');
+const chatProfile = document.getElementById('chatProfile');
+const messages = document.getElementById('messages');
+const messageInput = document.getElementById('messageInput');
+
+// Render nail tech list
+techs.forEach(t => {
+  const card = document.createElement('div');
+  card.className = 'tech-card';
+  card.innerHTML = `
+    <img src="${t.img}" alt="${t.name}">
+    <div class="tech-info">
+      <h4>${t.name}</h4>
+      <p>${t.tags}</p>
+    </div>
+  `;
+  card.onclick = () => openChat(t.name);
+  techList.appendChild(card);
+});
+
+function openChat(name) {
+  currentTech = name;
+  chatWith.textContent = name;
+
+  // Find and set profile image
+  const tech = techs.find(t => t.name === name);
+  if (tech) {
+    chatProfile.src = tech.img;
+    chatProfile.style.display = 'block';
+  }
+
+  if (!messagesData[currentTech]) {
+    messagesData[currentTech] = [];
+  }
+  renderMessages();
+}
+
+function sendMessage() {
+  const text = messageInput.value.trim();
+  if (!text || !currentTech) return;
+
+  // Store sent message
+  messagesData[currentTech].push({ text, type: "user" });
+
+  // Auto-reply after 1s
+  setTimeout(() => {
+    messagesData[currentTech].push({
+      text: "Thanks for your message! I’ll get back to you soon 💅",
+      type: "tech"
+    });
+    renderMessages();
+  }, 1000);
+
+  renderMessages();
+  messageInput.value = '';
+}
+
+function renderMessages() {
+  messages.innerHTML = '';
+  messagesData[currentTech].forEach(msg => {
+    const div = document.createElement('div');
+    div.className = `message ${msg.type}`;
+    div.textContent = msg.text;
+    messages.appendChild(div);
+  });
+  messages.scrollTop = messages.scrollHeight;
+}
+</script>
+
+</body>
+</html>

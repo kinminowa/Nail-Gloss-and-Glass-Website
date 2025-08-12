@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=1024"> <!-- Force desktop width -->
+  <title>Book Now</title>
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://www.dafont.style/css/javanese-text-font.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+html, body {
+  overflow-x: hidden; /* stop horizontal scroll */
+}
+
+@media (max-width: 1024px) {
+  html, body {
+    min-width: auto; /* allow normal mobile scaling */
+  }
+}
+
+
+    body {
+  margin: 0;
+  padding: 0;
+  background-color: #f7f5f2;
+  height: auto; /* Let content set the height */
+  min-height: 100%; /* Not forcing 100vh */
+}
+
+    .booking-section {
+      max-width: 600px;
+      margin: 250px auto 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+  .booking-section {
+    margin: 80px auto 30px auto; /* Smaller top margin for mobile */
+    padding: 20px;
+  }
+}
+    .booking-section h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #4F0404;
+    }
+    .booking-section label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+    .booking-section select,
+    .booking-section input,
+    .booking-section textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    .booking-section button {
+      width: 100%;
+      padding: 12px;
+      background: #4F0404;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .booking-section button:hover {
+      background: #300202;
+    }
+  </style>
+</head>
+
+
+<header>
+  <nav>
+    <ul class="nav-left">
+      <li>
+        <a href="message.html" class="message-link" aria-label="Messages">
+          <img src="message-icon.svg" alt="Messages" style="width:24px; height:24px; vertical-align:middle; border:none; background:none;">
+        </a>
+      </li>
+    </ul>
+
+    <ul class="nav-center">
+      <li><a href="index.html" class="home-text">Home</a></li>
+      <li><a href="#featured-nail-art">Featured Nail Art</a></li>
+      <li><a href="#nail-tech-class">Top-rated Nail Techs</a></li>
+    </ul>
+
+<ul class="nav-right">
+  <li>
+    <a href="login.html" class="login-link">
+      <img src="profile-icon.svg" alt="Profile" class="login-icon">
+      Log In
+    </a>
+  </li>
+</ul>
+
+  </nav>
+</header>
+
+
+<section class="booking-section">
+  <h2>Book Your Nail Tech</h2>
+  <form id="bookingForm">
+    <label for="nailTech">Choose a Nail Tech:</label>
+    <select id="nailTech" required>
+  <option value="">-- Select a Nail Tech --</option>
+  <option value="Jessa Nails by Jessa Marie">Jessa Nails by Jessa Marie</option>
+  <option value="Polished by Arriane">Polished by Arriane</option>
+  <option value="TipTop Nails by Mika">TipTop Nails by Mika</option>
+  <option value="Glam Touch by Bea">Glam Touch by Bea</option>
+  <option value="Claw & Glow by Shane">Claw & Glow by Shane</option>
+  <option value="Nailbar Diaries by Kaye">Nailbar Diaries by Kaye</option>
+  <option value="Bella Nails Studio">Bella Nails Studio</option>
+  <option value="Luna Nail Lounge">Luna Nail Lounge</option>
+  <option value="Sophia’s Nail Bar">Sophia’s Nail Bar</option>
+  <option value="Maya Nail Artistry">Maya Nail Artistry</option>
+  <option value="Olivia Nails">Olivia Nails</option>
+  <option value="Aria Nail Spa">Aria Nail Spa</option>
+      </select>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" required>
+
+    <label for="time">Time:</label>
+    <input type="time" id="time" required>
+
+    <label for="notes">Additional Notes:</label>
+    <textarea id="notes" placeholder="Any special requests?"></textarea>
+
+    <button type="submit">Book Now</button>
+  </form>
+</section>
+
+<script>
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const isLoggedIn = localStorage.getItem("userLoggedIn") === "true";
+
+    // If user is not logged in, redirect to login.html with redirect parameter
+    if (!isLoggedIn) {
+      alert("Please log in first to book a nail tech.");
+      window.location.href = "login.html?redirect=booknow.html";
+      return;
+    }
+
+    // If logged in, proceed with booking
+    const tech = document.getElementById('nailTech').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    alert(`Booking confirmed with ${tech} on ${date} at ${time}`);
+  });
+</script>
+
+
+</body>
+</html>

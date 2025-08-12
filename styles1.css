@@ -1,0 +1,419 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #F3F2EE;
+}
+
+
+/* Hero Content */
+.hero-content {
+  position: absolute;
+  top: 60%;
+  left: 50px;
+  transform: translateY(-50%);
+  max-width: 500px;
+  padding: 10px 30px;
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+.nail-tech-profile {
+  margin-top: 166px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 0 20px; /* keeps margin space on both sides */
+  box-sizing: border-box;
+  flex-wrap: nowrap; /* force side-by-side */
+}
+
+/* LEFT COLUMN */
+.nail-tech-left {
+  flex: 0 0 auto;
+  width: 455px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-pic {
+  width: 100%;
+  height: auto;
+  max-width: 455px;
+  aspect-ratio: 455 / 523;
+  object-fit: cover;
+  margin-top: 100px;
+}
+
+/* RIGHT COLUMN */
+.nail-tech-right {
+  flex: 0 0 auto;
+  width: 712px;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.location-img {
+  width: 100%;
+  height: auto;
+  max-width: 712px;
+  aspect-ratio: 712 / 548;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 100px;
+}
+
+/* Name + message icon */
+.profile-name {
+  font-family: 'Jacques Francois', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #000;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-btn img {
+  width: 24px;   /* match icon size */
+  height: 24px;
+  object-fit: contain;
+}
+
+
+/* Star rating */
+.star-rating {
+  margin-top: 6px;
+  font-size: 20px;
+  color: inherit;
+}
+
+/* Force desktop layout but shrink proportionally */
+/* Mobile/tablet tweak: keep your side-by-side layout but make the two images match and align */
+@media (max-width: 1200px) {
+  .nail-tech-profile {
+    flex-wrap: nowrap;        /* keep side-by-side */
+    align-items: center;      /* vertically center both images in the row */
+  }
+
+  .nail-tech-left,
+  .nail-tech-right {
+    flex: 1 1 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* center image inside each column */
+    justify-content: flex-start;
+    padding: 0;               /* we'll add small side padding below */
+  }
+
+  /* Make both images the same max height so they visually align */
+  .profile-pic,
+  .location-img {
+    width: 100%;
+    max-width: 95%;           /* keep some breathing room inside the column */
+    height: auto;
+    max-height: 360px;        /* <-- choose a value that looks good on your phones */
+    object-fit: cover;
+    margin-top: 20px;         /* small top spacing, same for both */
+    display: block;
+  }
+
+  /* Outer spacing: profile pic has left padding, location has right padding */
+  .nail-tech-left {  padding-left: 12px;  }
+  .nail-tech-right { padding-right: 12px; }
+
+  /* If you previously set big margin-top on the images, remove/override it here */
+  .profile-pic, .location-img { margin-top: 20px !important; }
+}
+
+
+
+
+/* ART WORK SECTION */
+.art-work {
+  margin-top: 164px;
+  text-align: center;
+}
+
+.art-work h2 {
+  font-family: 'Italianno', cursive;
+  font-weight: normal;
+  font-size: clamp(28px, 2.5vw, 48px); /* scales with screen but max 48px */
+  color: #4F0404;
+  margin-bottom: 40px;
+  margin-top: 100px;
+  position: relative;
+  z-index: 5;
+}
+
+
+.art-grid {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  column-gap: 28px;
+  row-gap: 167px;
+  padding: 135px 28px 0; /* pushes the first row down */
+  justify-content: center;
+}
+
+
+.art-item {
+  position: relative;
+  width: clamp(200px, 20vw, 370px);
+  height: auto; /* let height adapt to content */
+  display: flex;
+  flex-direction: column;
+}
+
+.art-box {
+  flex: 1; /* ✅ Box grows to match tallest in row */
+  background-color: #8F7E76;
+  padding: calc(277px / 2 + 20px) 2vw 2vw;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.art-circle {
+  position: absolute;
+  top: -7vw; /* proportional overlap */
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(150px, 15vw, 277px);
+  height: clamp(150px, 14.5vw, 270px);
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.art-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.art-box h3 {
+  font-size: clamp(14px, 1.4vw, 20px);
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.art-box p {
+  font-size: clamp(14px, 1.4vw, 20px);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* MOBILE FIX */
+@media (min-width: 1200px) {
+  .art-item {
+    width: 370px;
+    margin: 0 auto; /* center without side accumulation */
+  }
+
+  .art-box {
+    height: 382px;
+    padding: calc(277px / 2 + 20px) 20px 20px; /* same as desktop */
+  }
+
+  .art-work {
+    margin-top: 60px; /* smaller gap before section on mobile */
+  }
+
+  .art-work h2 {
+    margin-top: 40px; /* bring heading closer to previous section */
+  }
+}
+
+
+/* CLIENT FEEDBACK SECTION */
+.clients-section {
+  margin-top: 164px;
+  text-align: center;
+}
+
+.clients-section h2 {
+  font-family: 'Italianno', cursive;
+  font-weight: 400;
+  font-size: 48px;
+  color: black;
+  text-align: center;
+  margin-top: 164px; /* gap from artwork section */
+  margin-bottom: 60px; /* space between title & feedback boxes */
+}
+
+
+.feedback-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-grid {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.feedback-grid::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+
+.feedback-box {
+  background: white;
+  flex: 0 0 300px; /* fixed width */
+  padding: 20px;
+  font-family: 'Javanese Text', sans-serif;
+  font-size: 15px;
+  color: black;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.slide-btn {
+  background: #c4c3c1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slide-btn.prev {
+  left: 0;
+}
+
+.slide-btn.next {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .feedback-box {
+    flex: 0 0 85%; /* bigger on mobile */
+  }
+}
+
+/* Contact Section */
+.contact-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  margin-top: 157px;
+  padding: 0 20px; /* add left/right padding for all views */
+  box-sizing: border-box;
+}
+
+
+.business-title {
+  font-family: 'Jaldi', sans-serif;
+  font-weight: 400;
+  font-size: 64px;
+  letter-spacing: 5%;
+  color: black;
+  margin: 0;
+}
+
+.hours-title {
+  font-family: 'Jaini', cursive;
+  font-weight: 400;
+  font-size: 64px;
+  letter-spacing: 5%;
+  color: #847068;
+  margin-left: 210px;
+}
+
+.schedule {
+  margin-top: 69px;
+}
+
+.day-time {
+  font-family: 'Gulzar', serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 92px;
+  letter-spacing: 5%;
+  color: black;
+  margin: 0;
+}
+
+.schedule hr {
+  border: none;
+  border-top: 1px solid black;
+  width: 516px;
+  margin: 0;
+}
+
+.contact-box {
+  width: 522px;
+  height: 438px;
+  background-color: #E1DED7;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+
+.contact-box h3 {
+  font-family: 'Gulzar', serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 92px;
+  letter-spacing: 5%;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.contact-details {
+  font-family: 'Gulzar', serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 70px;
+  letter-spacing: 5%;
+  color: #4F0404;
+}
+
+.contact-details hr {
+  border: none;
+  border-top: 1px solid black;
+  margin: 0;
+  width: 100%;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .contact-section {
+    flex-direction: column; /* stack items vertically */
+    align-items: center;    /* center them in the column */
+    gap: 40px;              /* smaller gap for mobile */
+    padding: 0 20px;        /* keeps margin on left/right */
+  }
+
+  .schedule hr,
+  .contact-box {
+    width: 100%; /* make them responsive */
+    max-width: 522px; /* prevent over-stretching */
+  }
+
+  .hours-title {
+    margin-left: 0; /* remove fixed margin on mobile */
+    text-align: center;
+  }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In / Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('log-in.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 350px;
+      margin: auto;
+      backdrop-filter: blur(6px);
+      text-align: center;
+    }
+    h2 {
+      color: #4F0404;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4F0404;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #300202;
+    }
+    .toggle-link {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #4F0404;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Login Form -->
+  <div id="loginForm">
+    <h2>Log In</h2>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="loginUsername" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" required>
+    </div>
+    <button onclick="loginUser()">Log In</button>
+    <div class="toggle-link" onclick="showSignup()">Don't have an account? Sign Up</div>
+  </div>
+
+  <!-- Signup Form -->
+  <div id="signupForm" class="hidden">
+    <h2>Sign Up</h2>
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" id="firstName" required>
+    </div>
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" id="lastName" required>
+    </div>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" id="signupUsername" required>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" required>
+    </div>
+    <div class="form-group">
+      <label>Contact Number</label>
+      <input type="tel" id="contact" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="signupPassword" required>
+    </div>
+    <button onclick="signupUser()">Sign Up</button>
+    <div class="toggle-link" onclick="showLogin()">Already have an account? Log In</div>
+  </div>
+</div>
+
+<script>
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  function showSignup() {
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('signupForm').classList.remove('hidden');
+  }
+  function showLogin() {
+    document.getElementById('signupForm').classList.add('hidden');
+    document.getElementById('loginForm').classList.remove('hidden');
+  }
+
+  function signupUser() {
+    const username = document.getElementById('signupUsername').value;
+    const password = document.getElementById('signupPassword').value;
+    if (username && password) {
+      localStorage.setItem("user", JSON.stringify({ username, password }));
+      alert("Account created! Please log in.");
+      showLogin();
+    } else {
+      alert("Please fill in all required fields.");
+    }
+  }
+
+  function loginUser() {
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const redirectPage = getQueryParam('redirect') || "booknow.html";
+
+    if (storedUser && storedUser.username === username && storedUser.password === password) {
+      localStorage.setItem("userLoggedIn", "true");
+      alert("Login successful!");
+      window.location.href = redirectPage;
+    } else {
+      alert("Invalid username or password.");
+    }
+  }
+</script>
+
+</body>
+</html>
