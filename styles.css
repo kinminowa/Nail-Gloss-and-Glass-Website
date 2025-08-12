@@ -1,0 +1,934 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Georgia', serif;
+}
+
+body {
+  background-color: #F3F2EE;
+}
+
+
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 400px; /* fixed height across all devices */
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: left;
+  padding: 30px;
+  max-width: 600px;
+}
+
+
+/* NAVIGATIONS */
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  height: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: transparent;
+}
+
+.nav-left,
+.nav-center,
+.nav-right {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+  }
+
+  .nav-left,
+  .nav-center,
+  .nav-right {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+nav ul {  
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+nav ul li {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+/* Reset all nav link base styles */
+nav ul li a {
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 0;
+  font-weight: 800;
+  line-height: 2;
+  display: inline-block;
+  transition: none;
+  background: transparent;
+  color: white;
+}
+
+/* Home link — black text */
+nav ul li a.home-text {
+  color: black !important;
+  background: transparent;
+}
+
+/* Featured Nail Art & Nail Tech — maroon text with 50% white box */
+nav ul li a:not(.home-text):not(.login-link):not(.message-link) {
+  color: #4F0404;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Message link — icon only, no background */
+nav ul li a.message-link {
+  padding: 0;
+  background: transparent;
+}
+
+nav ul li a.message-link img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* Log In — plain black text */
+nav ul li a.login-link {
+  color: black;
+  background: transparent;
+}
+
+/* No hover effects */
+nav ul li a:hover {
+  background: inherit;
+  color: inherit;
+  text-shadow: none;
+}
+
+
+/* Profile icon beside Log In */
+.login-link {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between icon and text */
+}
+
+.login-link .login-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+}
+
+
+
+
+
+
+
+/* BACKGROUND IMAGE */
+.hero {
+  position: relative;
+  height: 100vh;
+  max-height: 700px; /* set a max height similar to desktop */
+  background-image: url('background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  user-select: none;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto; /* don't force full screen on small devices */
+    min-height: 700px; /* give it a nice mobile height */
+    max-height: 800px;
+    padding: 40px 20px;
+  }
+}
+
+
+/* Hero Content */
+.hero-content {
+  position: absolute;
+  top: 60%;
+  left: 50px;
+  transform: translateY(-50%);
+  max-width: 500px;
+  padding: 10px 30px;
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+/* H1 with Italianno font */
+.hero-content h1 {
+  font-family: 'Italianno', cursive;
+  font-weight: normal;
+  font-size: 64px;
+  color: #190404;
+  letter-spacing: 3.2px;
+  text-align: center;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+/* P with Javanese Text Font */
+.hero-content p {
+  font-family: 'Javanese Text Font', sans-serif;
+  font-size: 14px;
+  width: 388px;
+  height: 63px;
+  letter-spacing: 0.7px;
+  text-align: center;
+  line-height: 1.4;
+  margin: 0 auto 23px auto;
+  color: black;
+}
+
+/* Button container */
+.button-box {
+  margin-left: -20px;
+  margin-top: 30px;
+  display: inline-block;
+}
+
+/* Shared button base style */
+.btn {
+  width: 181px;
+  height: 62px;
+  text-decoration: none;
+  border-radius: 75px;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+/* Book Now */
+.btn-book-now {
+  background-color: #847068;
+  color: #FFFFFF;
+  border: none;
+}
+
+/* Learn More */
+.btn-learn-more {
+  background-color: #FFF9F8;
+  color: #4F0404;
+  border: 1px solid black;
+}
+
+/* Optional hover effect */
+.btn-book-now,
+.btn-learn-more {
+  font-family: 'Italianno', cursive;
+  font-size: 28px;
+  font-weight: normal;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-content {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 42px;
+    letter-spacing: 2px;
+  }
+
+  .hero-content p {
+    font-size: 12px;
+    width: 100%;
+    height: auto;
+  }
+
+  .btn {
+    width: 150px;
+    height: 50px;
+    font-size: 14px;
+  }
+
+  .btn-book-now,
+  .btn-learn-more {
+    font-size: 24px;
+  }
+
+  .button-box {
+    margin-left: 0;
+  }
+}
+
+/* NAIL TECH ROW*/
+
+.hidden {
+  display: none;
+}
+
+#nail-tech-class {
+  margin-top: 109px;; /* pushes section below full-screen header */
+  padding: 40px 20px;
+  background-color: #F3F2EE;
+}
+
+#nail-tech-class h2 {
+  text-align: center;
+  font-family: 'Italianno', cursive;
+  font-size: 48px;
+  font-weight: normal;
+  color: #4F0404;
+  letter-spacing: 5%;
+  margin-bottom: 40px;
+}
+
+
+/* Gallery wrapper for buttons and image grid */
+.gallery-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Navigation buttons */
+.gallery-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 95px; /* gap between buttons and images */
+  margin-top: 40px;
+}
+
+.nav-btn {
+  background-color: #847068;
+  color: #fff;
+  border: none;
+  padding: 16px 20px;
+  font-size: 24px;
+  cursor: pointer;
+
+  /* Box shape with mixed corner radius */
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  /* Optional: add shadow for depth */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.nav-btn:hover {
+  background-color: #6e5b57;
+}
+
+
+/* Image grid */
+.course-image-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  grid-template-rows: repeat(2, 250px);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-image-gallery img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.course-image-gallery img:hover {
+  transform: scale(1.05);
+}
+
+.nail-card {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.nail-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nail-card-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* transparent dark background */
+  color: white;
+  padding: 10px;
+  text-align: left;
+  font-family: "Javanese Text", sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+
+/* Slide buttons style */
+.slide-btn {
+  width: 52px;
+  height: 52px;
+  background-color: #847068;
+  border: none;
+  border-radius: 8px; /* slightly rounded corners */
+  cursor: pointer;
+  color: white;
+  font-size: 28px;
+  line-height: 52px; /* center arrow vertically */
+  text-align: center;
+  user-select: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.slide-btn:hover {
+  background-color: #6e5b57;
+}
+
+/* Position on desktop: keep your flex gap for layout */
+.gallery-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 95px;
+  margin-top: 40px;
+}
+
+/* Position buttons on mobile for easier tapping */
+@media (max-width: 768px) {
+  .slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  #prevBtn {
+    left: 10px;
+  }
+  #nextBtn {
+    right: 10px;
+  }
+}
+
+
+
+
+
+
+/* Promo Section Styles */
+#promo-section {
+  background-image: url('promo-section.jpg'); /* replace with actual image path */
+  background-size: cover;
+  background-position: center;
+  width: 100%; /* ✅ Fill available width */
+  max-width: 1909px; /* ✅ Prevent it from getting wider than desktop design */
+  height: 411px;
+  margin: 118px auto 0; /* Center horizontally */
+  display: flex;
+  align-items: center; /* vertical center for text */
+  justify-content: center; /* horizontal center for text */
+}
+
+.promo-content {
+  text-align: center;
+}
+
+.promo-content h2 {
+  font-family: 'Javanese Text', sans-serif;
+  font-weight: normal;
+  font-size: 40px;
+  color: #4F0404;
+  margin-bottom: 10px;
+}
+
+.promo-content p {
+  font-family: 'Javanese Text', sans-serif;
+  font-weight: normal;
+  font-size: 24px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.promo-btn {
+  display: inline-block;
+  background-color: #847068;
+  border-radius: 75px;
+  padding: 10px 30px;
+  color: white;
+  font-family: 'Italianno', cursive;
+  font-size: 32px;
+  letter-spacing: 1.6px; /* 5% of 32px */
+  text-decoration: none;
+}
+
+/* Tablet & below */
+@media (max-width: 1050px) {
+  #promo-section {
+    height: auto;
+    padding: 50px 0; /* keep space inside if height adjusts */
+  }
+  .promo-content {
+    width: 90%;
+  }
+}
+
+/* Featured Nail Art Section */
+#featured-nail-art {
+  margin-top: 118px;
+  text-align: center;
+}
+
+#featured-nail-art h2 {
+  font-family: 'Italianno', cursive;
+  font-weight: normal;
+  font-size: 48px;
+  color: #4F0404;
+  margin-bottom: 40px;
+}
+
+/* Layout for image + info */
+.nail-art-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: nowrap; /* Prevent stacking */
+  transform: scale(1); /* Default size */
+}
+
+.nail-art-image {
+  width: 449px;
+  height: 528px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Info Boxes */
+.nail-art-info {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.info-box {
+  background-color: #781B0D;
+  border-radius: 12px;
+  width: 497px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-family: 'Jacques Francois', serif;
+  font-size: 24px;
+  color: #F3F2EE;
+  gap: 8px;
+}
+
+.info-box span {
+  margin-left: 5px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Icons below info */
+.nail-art-icons {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+/* Mobile View — Keep layout but scale down */
+@media (max-width: 1050px) {
+  .nail-art-container {
+    transform: scale(0.85); /* Shrinks proportionally */
+    transform-origin: top center; /* Scale from top center */
+  }
+}
+
+@media (max-width: 768px) {
+  .nail-art-container {
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nail-art-container {
+    transform: scale(0.65);
+    transform-origin: top center;
+  }
+}
+
+/*Feedback Section*/
+#feedback-section {
+  margin-top: 118px;
+  text-align: center;
+}
+
+#feedback-section h2 {
+  font-family: 'Italianno', cursive;
+  font-weight: normal;
+  font-size: 48px;
+  color: black;
+  margin-bottom: 40px;
+}
+
+/* Feedback slider container */
+.feedback-slider {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Track for sliding */
+.feedback-track {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* desktop gap */
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Each feedback box */
+.feedback-box {
+  flex: 0 0 375.02px;
+  height: 203px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  font-family: 'Javanese Text', sans-serif;
+  font-size: 15px;
+  color: black;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .feedback-track {
+    gap: 20px; /* smaller gap for mobile */
+  }
+  .feedback-box {
+    flex: 0 0 calc(50% - 10px); /* 2 boxes per slide (minus half gap) */
+  }
+}
+
+.feedback-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.feedback-box.zoomed {
+  transform: scale(1.2); /* Zoom in */
+  z-index: 10; /* Bring to front */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Modal background */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal box */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  text-align: left;
+}
+
+/* Close button */
+.modal-close {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  float: right;
+}
+
+.modal-close:hover {
+  color: red;
+}
+
+/* FOOTER */
+
+.footer {
+  background-color: #DBDBDB;
+  width: 100%;
+  margin-top: 65px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 1404px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center contents horizontally */
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 80px; /* space between logo and follow us */
+  width: 100%; /* full width inside footer-inner */
+  max-width: 1150px; /* prevent too wide */
+}
+
+.footer-logo {
+  height: auto;
+  max-height: 80px;
+}
+
+.footer-follow {
+  display: flex;
+  align-items: center;
+  gap: 80px; /* reduced gap from 200px for better mobile */
+}
+
+.follow-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: clamp(16px, 2vw, 24px);
+  color: #781B0D;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  font-size: clamp(24px, 3vw, 42px);
+  color: #781B0D;
+}
+
+.follow-line {
+  width: 100%;
+  max-width: 1150px; /* limit line width */
+  height: 2px;
+  background-color: #781B0D;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 1150px; /* limit width */
+  box-sizing: border-box;
+}
+
+/* Gaps between sections */
+.footer-bottom-content > .footer-section:first-child {
+  margin-right: 20px;
+}
+
+.footer-bottom-content > .footer-section:nth-child(2) {
+  margin-right: 40px; /* reduced gap for better mobile */
+}
+
+.footer-bottom-content > .footer-section:last-child {
+  margin-right: 0;
+}
+
+.footer-section {
+  flex: 1 1 250px;
+  max-width: 350px; /* limit max width per column */
+  box-sizing: border-box;
+}
+
+.footer-section h4 {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: #781B0D;
+  margin-bottom: 15px;
+}
+
+.footer-section p {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 1.8vw, 22px);
+  color: #847068;
+  margin: 5px 0;
+}
+
+.recent-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.recent-item img {
+  width: 80px;
+  height: 54px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.recent-item .date {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: clamp(12px, 1.5vw, 18px);
+  color: #781B0D;
+}
+
+.recent-item .title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 1.8vw, 20px);
+  color: #847068;
+}
+
+.footer-copy {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 1.5vw, 20px);
+  color: #737373;
+  text-align: center;
+  margin-top: 20px;
+  max-width: 1150px;
+  width: 100%;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 768px) {
+  .footer-inner {
+    max-width: 350px; /* limit width on mobile */
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    max-width: 350px;
+  }
+
+  .footer-follow {
+    gap: 20px; /* reduce gap on mobile */
+    justify-content: center;
+  }
+
+  .follow-line {
+    max-width: 350px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .footer-bottom-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    max-width: 350px;
+  }
+
+  .footer-section {
+    max-width: 350px;
+    text-align: center;
+  }
+
+  .recent-item {
+    justify-content: center;
+  }
+
+  .footer-copy {
+    max-width: 350px;
+  }
+}
